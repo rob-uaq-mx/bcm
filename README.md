@@ -184,7 +184,7 @@ If you use BCM in academic work, please cite:
 
 ```bibtex
 @article{bcm2026,
-  author  = {Your Name},
+  author  = {G\'omez-Loenzo, Roberto Augusto and Rodr\'{\i}guez-Res\'endiz, Juvenal and Aviles, Marcos},
   title   = {BCM: A Lightweight Header-Only C++ Framework for Modular Component-Based Systems},
   journal = {SoftwareX},
   year    = {2026},
@@ -217,3 +217,4 @@ If you need a **minimal, understandable, C++-native component framework**, you'r
 ---
 
 **BCM**: Component-based architecture without the ceremony. 🚀
+
