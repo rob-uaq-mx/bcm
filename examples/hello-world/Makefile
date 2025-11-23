@@ -27,7 +27,7 @@ SERVER_DIR = server
 CLIENT_DIR = client
 
 # Compiler flags
-CXXFLAGS = -std=c++11 -I$(BCM_INCLUDE) -I$(INTERFACE_DIR) -fPIC -Wall
+CXXFLAGS = -std=c++11 -I$(BCM_INCLUDE) -I$(INTERFACE_DIR) -I$(SERVER_DIR) -I$(CLIENT_DIR) -fPIC -Wall
 LDFLAGS = -shared
 
 # Platform-specific flags
