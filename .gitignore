@@ -1,0 +1,92 @@
+# Build artifacts
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dll
+*.dylib
+*.exe
+*.out
+
+# Compiled Dynamic libraries
+*.so.*
+*.dylib.*
+
+# Static libraries
+*.la
+*.lo
+
+# Directories created by build systems
+bin/
+obj/
+Debug/
+Release/
+x64/
+x86/
+
+# Visual Studio / Visual C++
+*.user
+*.suo
+*.sdf
+*.opensdf
+*.vcxproj.filters
+*.vcxproj.user
+*.sln.docstates
+.vs/
+ipch/
+*.aps
+*.ncb
+*.opendb
+*.cachefile
+*.VC.db
+*.VC.VC.opendb
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+*.cmake
+!CMakeLists.txt
+
+# Code::Blocks
+*.layout
+*.depend
+*.cbp
+
+# Eclipse CDT
+.cproject
+.project
+.settings/
+
+# NetBeans
+nbproject/
+
+# Qt Creator
+*.pro.user
+*.autosave
+
+# Temporary files
+*~
+*.swp
+*.swo
+*.tmp
+*.temp
+*.bak
+*.orig
+
+# OS-specific
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+
+# Package managers
+node_modules/
+.npm/
