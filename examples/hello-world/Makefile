@@ -27,7 +27,11 @@ SERVER_DIR = server
 CLIENT_DIR = client
 
 # Compiler flags
+# Note: server/client include dirs are NOT added here to preserve binary
+# decoupling — main.cpp must only see interface headers, not implementations.
 CXXFLAGS = -std=c++11 -I$(BCM_INCLUDE) -I$(INTERFACE_DIR) -fPIC -Wall
+$(SERVER_OBJ): CXXFLAGS += -I$(SERVER_DIR)
+$(CLIENT_OBJ): CXXFLAGS += -I$(CLIENT_DIR)
 LDFLAGS = -shared
 
 # Platform-specific flags
@@ -66,13 +70,7 @@ $(CLIENT_LIB): $(CLIENT_OBJ)
 # Main application
 $(MAIN_APP): $(MAIN_OBJ)
 	$(CXX) -o $@ $^
-ifeq ($(OS),Windows_NT)
-	@echo.
-	@echo Build complete! Run: main.exe
-else
-	@echo ""
-	@echo "Build complete! Run: ./main"
-endif
+	@echo "Build complete! Run: $(MAIN_APP)"
 
 # Compile object files
 %.o: %.cpp
@@ -80,11 +78,7 @@ endif
 
 # Clean build artifacts
 clean:
-ifeq ($(OS),Windows_NT)
-	-$(RM) $(SERVER_DIR)\\*.o $(CLIENT_DIR)\\*.o *.o $(SERVER_LIB) $(CLIENT_LIB) $(MAIN_APP) 2>nul
-else
-	-$(RM) $(SERVER_DIR)/*.o $(CLIENT_DIR)/*.o *.o $(SERVER_LIB) $(CLIENT_LIB) $(MAIN_APP)
-endif
+	-rm -f $(SERVER_DIR)/*.o $(CLIENT_DIR)/*.o *.o $(SERVER_LIB) $(CLIENT_LIB) $(MAIN_APP)
 
 # Phony targets
 .PHONY: all clean

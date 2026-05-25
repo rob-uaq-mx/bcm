@@ -1,5 +1,4 @@
-#include "bcmc_client.h"
-#include "bcmc_server.h"
+#include "bcmi_talk.h"
 #include <bcm/bcm.h>
 #include <iostream>
 
