@@ -60,20 +60,24 @@ namespace bcm {
 		LoadComponentResult loadComponent(LPCTSTR dllName)
 		{
 			Dll *dll = new Dll;
-			if (dll->open(dllName) == false)
+			if (dll->open(dllName) == false) {
+				delete dll;
 				return LC_NODLL;
-			auto lpGetComponent = reinterpret_cast<GET_COMPONENT>(dll->getProc("getComponent"));
-			if (lpGetComponent == nullptr)
-				return LC_NOCOMPONENT;
-			else {
-				Component *component = lpGetComponent();
-				if (dllMap.find(component->getID()) != dllMap.end())
-					return LC_ALREADYUSED;
-				ComponentData cd;
-				cd.name = component->getName();
-				cd.dll = dll;
-				dllMap[component->getID()] = cd;
 			}
+			auto lpGetComponent = reinterpret_cast<GET_COMPONENT>(dll->getProc("getComponent"));
+			if (lpGetComponent == nullptr) {
+				delete dll;
+				return LC_NOCOMPONENT;
+			}
+			Component *component = lpGetComponent();
+			if (dllMap.find(component->getID()) != dllMap.end()) {
+				delete dll;
+				return LC_ALREADYUSED;
+			}
+			ComponentData cd;
+			cd.name = component->getName();
+			cd.dll = dll;
+			dllMap[component->getID()] = cd;
 			return LC_OK;
 		}
 		bool releaseComponent(const char *id)
