@@ -2,7 +2,7 @@
 #define COMPONENT_MANAGER_H
 
 /**
-@file dll.h
+@file componentmgr.h
 @brief Win32 DLL manager singleton class.
 
 A DLL class for managing Win32 dynamic linked libraries

@@ -2,7 +2,7 @@
 #define COMPONENT_MANAGER_H
 
 /**
-@file dll.h
+@file componentmgr.h
 @brief Linux DLL manager singleton class.
 
 A DLL class for managing Linux dynamic linked libraries
