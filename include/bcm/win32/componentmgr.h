@@ -41,12 +41,7 @@ namespace bcm {
 
 	class ComponentManager
 	{
-		typedef Component *(*GET_COMPONENT)(GetComponentResult *result);
-/*#ifdef _UNICODE
-		typedef std::wstring tstring;
-#else
-		typedef std::string tstring;
-#endif*/
+		using GET_COMPONENT = Component *(*)();
 		struct ComponentData {
 			std::string name;
 			Dll *dll;
@@ -67,12 +62,11 @@ namespace bcm {
 			Dll *dll = new Dll;
 			if (dll->open(dllName) == false)
 				return LC_NODLL;
-			GET_COMPONENT lpGetComponent = (GET_COMPONENT)dll->getProc("getComponent");
-			if (lpGetComponent == (GET_COMPONENT)NULL)
+			auto lpGetComponent = reinterpret_cast<GET_COMPONENT>(dll->getProc("getComponent"));
+			if (lpGetComponent == nullptr)
 				return LC_NOCOMPONENT;
 			else {
-				GetComponentResult result;
-				Component *component = lpGetComponent(&result);
+				Component *component = lpGetComponent();
 				if (dllMap.find(component->getID()) != dllMap.end())
 					return LC_ALREADYUSED;
 				ComponentData cd;
@@ -84,7 +78,7 @@ namespace bcm {
 		}
 		bool releaseComponent(const char *id)
 		{
-			std::map<std::string, ComponentData>::iterator it = dllMap.find(id);
+			auto it = dllMap.find(id);
 			if (it != dllMap.end()) {
 				delete it->second.dll;
 				dllMap.erase(it);
@@ -94,20 +88,19 @@ namespace bcm {
 		}
 		GetComponentResult getComponent(/*in*/ const char *id, /*out*/ Component **component)
 		{
-			std::map<std::string, ComponentData>::iterator it = dllMap.find(id);
+			auto it = dllMap.find(id);
 			if (it == dllMap.end()) {
-				*component = 0;
+				*component = nullptr;
 				return GC_UNREGISTERED;
 			}
 			Dll *dll = it->second.dll;
-			GET_COMPONENT lpGetComponent = (GET_COMPONENT)dll->getProc("getComponent");
-			if (lpGetComponent == (GET_COMPONENT)NULL) {
-				*component = 0;
+			auto lpGetComponent = reinterpret_cast<GET_COMPONENT>(dll->getProc("getComponent"));
+			if (lpGetComponent == nullptr) {
+				*component = nullptr;
 				return GC_NOCOMPONENT;
 			}
-			GetComponentResult result;
-			*component = (*lpGetComponent)(&result);
-			return result;
+			*component = lpGetComponent();
+			return (*component != nullptr) ? GC_OK : GC_NOCOMPONENT;
 		}
 	};
 

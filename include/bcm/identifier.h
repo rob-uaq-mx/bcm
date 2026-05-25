@@ -31,11 +31,12 @@ namespace bcm {
 			: id_(id), name_(name)
 		{
 		}
-		virtual const char *getID()
+		virtual ~Identifier() = default;
+		const char *getID() override
 		{
 			return id_.c_str();
 		}
-		virtual const char *getName()
+		const char *getName() override
 		{
 			return name_.c_str();
 		}

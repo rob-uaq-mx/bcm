@@ -25,13 +25,13 @@ namespace bcm {
 	protected:
 		HINSTANCE hDll;
 	public:
-		Dll() : hDll(NULL)
+		Dll() : hDll(nullptr)
 		{
 		}
 		bool open(LPCTSTR fileName)
 		{
 			hDll = LoadLibrary(fileName);
-			return hDll != NULL;
+			return hDll != nullptr;
 		}
 		void close()
 		{
@@ -40,7 +40,7 @@ namespace bcm {
 		}
 		bool isOpen()
 		{
-			return hDll != NULL;
+			return hDll != nullptr;
 		}
 		FARPROC getProc(LPCSTR procName)
 		{
@@ -52,7 +52,7 @@ namespace bcm {
 		}
 	};
 
-} // namespace pcm
+} // namespace bcm
 
 #endif
 

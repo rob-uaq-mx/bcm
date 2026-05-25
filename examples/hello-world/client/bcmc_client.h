@@ -21,30 +21,30 @@ protected:
 		bcm::Identifier<BCMI_TalkInterface>("talk", "Talk to me")
 	{
 	}
-	virtual bcm::IdentifierData *getProvidedInterfaceTable()
+	bcm::IdentifierData *getProvidedInterfaceTable() override
 	{
 		static bcm::IdentifierData idData[] = {
 			{ "talk", "Talk to me" },
-			{ 0, 0 }
+			{ nullptr, nullptr }
 		};
 		return idData;
 	}
-	virtual bcm::IdentifierData *getRequiredInterfaceTable()
+	bcm::IdentifierData *getRequiredInterfaceTable() override
 	{
 		static bcm::IdentifierData idData[] = {
 			{ "hello", "Hello there" },
 			{ "goodbye", "See you" },
-			{ 0, 0 }
+			{ nullptr, nullptr }
 		};
 		return idData;
 	}
-	virtual bcm::Interface *getInterface(const char *id)
+	bcm::Interface *getInterface(const char *id) override
 	{
 		if (std::string("talk") == id)
 			return static_cast<BCMI_TalkInterface *>(this);
-		return 0;
+		return nullptr;
 	}
-	virtual bool setInterface(bcm::Interface *iface)
+	bool setInterface(bcm::Interface *iface) override
 	{
 		if (iface == 0) {
 			std::cout << "Interface is null." << std::endl;

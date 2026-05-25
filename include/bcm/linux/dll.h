@@ -11,22 +11,22 @@ namespace bcm {
 	protected:
 		void *handle;
 	public:
-		Dll() : handle(NULL)
+		Dll() : handle(nullptr)
 		{
 		}
 		bool open(const char *fileName)
 		{
 			handle = dlopen(fileName, RTLD_LAZY);
-			return handle != NULL;
+			return handle != nullptr;
 		}
 		void close()
 		{
-			if (handle != NULL)
+			if (handle != nullptr)
 				dlclose(handle);
 		}
 		bool isOpen()
 		{
-			return handle != NULL;
+			return handle != nullptr;
 		}
 		void *getProc(const char *loaderName)
 		{

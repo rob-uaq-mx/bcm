@@ -31,6 +31,7 @@ namespace bcm {
 		virtual IdentifierData *getRequiredInterfaceTable() = 0;
 		virtual Interface *getInterface(const char *id) = 0;
 		virtual bool setInterface(Interface *iface) = 0;
+		virtual ~Component() = default;
 	};
 
 } // namespace bcm

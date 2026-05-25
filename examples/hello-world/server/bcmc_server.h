@@ -22,32 +22,32 @@ protected:
 		bcm::Identifier<BCMI_GoodbyeInterface>("goodbye", "See you")
 	{
 	}
-	virtual bcm::IdentifierData *getProvidedInterfaceTable()
+	bcm::IdentifierData *getProvidedInterfaceTable() override
 	{
 		static bcm::IdentifierData idData[] = {
 			{ "hello", "Hello there" },
 			{ "goodbye", "See you" },
-			{ 0, 0 }
+			{ nullptr, nullptr }
 		};
 		return idData;
 	}
-	virtual bcm::IdentifierData *getRequiredInterfaceTable()
+	bcm::IdentifierData *getRequiredInterfaceTable() override
 	{
 		static bcm::IdentifierData idData[] = {
-			{ 0, 0 }
+			{ nullptr, nullptr }
 		};
 		return idData;
 	}
-	virtual bcm::Interface *getInterface(const char *id)
+	bcm::Interface *getInterface(const char *id) override
 	{
 		std::cout << "Interface requested to server: " << id << std::endl;
 		if (std::string("hello") == id)
 			return static_cast<BCMI_HelloInterface *>(this);
 		if (std::string("goodbye") == id)
 			return static_cast<BCMI_GoodbyeInterface *>(this);
-		return 0;
+		return nullptr;
 	}
-	virtual bool setInterface(bcm::Interface *iface)
+	bool setInterface(bcm::Interface *iface) override
 	{
 		return false;
 	}

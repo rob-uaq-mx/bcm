@@ -66,7 +66,7 @@ int main()
 	bcm::IdentifierData *ifaces;
 	ifaces = server->getProvidedInterfaceTable();
 	std::cout << "Interfaces provided by server:" << std::endl;
-	for (int i = 0; ifaces[i].id != 0; i++)
+	for (int i = 0; ifaces[i].id != nullptr; i++)
 		std::cout << ifaces[i].id << '\t' << ifaces[i].name << std::endl;
 	bcm::Interface *iface;
 	iface = server->getInterface("hello");
@@ -93,7 +93,7 @@ int main()
 		return 1;
 	}
 	BCMI_TalkInterface *speaker = dynamic_cast<BCMI_TalkInterface *>(iface);
-	if (speaker != 0)
+	if (speaker != nullptr)
 		speaker->talk();
 	return 0;
 }

@@ -23,6 +23,7 @@ namespace bcm {
 
 	struct Interface : public Identifiable
 	{
+		virtual ~Interface() = default;
 	};
 
 } // namespace bcm
